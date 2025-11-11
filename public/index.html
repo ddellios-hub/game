@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="el">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storybook Meadow</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ui-panel">
+      <h1>Storybook Meadow</h1>
+      <p class="tagline">Ένας online κόσμος ρόλων για μικρούς εξερευνητές!</p>
+      <form id="join-form">
+        <label>
+          Το όνομά σου:
+          <input type="text" id="nickname" maxlength="12" placeholder="π.χ. Λάιο" required />
+        </label>
+        <label>
+          Χρώμα στολής:
+          <input type="color" id="color" value="#ff8a65" />
+        </label>
+        <button type="submit">Ξεκίνα την περιπέτεια</button>
+      </form>
+      <div class="mood-selector hidden" id="mood-selector">
+        <label for="mood">Πώς νιώθεις;</label>
+        <select id="mood">
+          <option value="περήφανος">Περήφανος/η</option>
+          <option value="χαρούμενος">Χαρούμενος/η</option>
+          <option value="περίεργος">Περίεργος/η</option>
+          <option value="γενναίος">Γενναίος/α</option>
+        </select>
+        <button type="button" id="send-mood">Δείξε το συναίσθημα</button>
+      </div>
+      <p class="hint">Χρησιμοποίησε τα βελάκια για να περπατήσεις στο λιβάδι και κάνε παρέα με τους φίλους σου.</p>
+    </div>
+    <canvas id="playground" width="1600" height="900" aria-label="Storybook Meadow"></canvas>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
