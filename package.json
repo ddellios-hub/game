@@ -1,25 +1,35 @@
 {
-  "name": "storybook-meadow",
-  "version": "1.0.0",
-  "description": "Friendly online role-play adventure for children with beautiful landscapes.",
-  "main": "server.js",
+  "name": "sandbox-hub",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@8.15.4",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "format": "turbo run format",
+    "prepare": "husky install",
+    "db:push": "pnpm --filter @sandbox/server prisma db push",
+    "db:seed": "pnpm --filter @sandbox/server prisma db seed",
+    "db:migrate": "pnpm --filter @sandbox/server prisma migrate deploy"
   },
-  "keywords": [
-    "game",
-    "children",
-    "role-play",
-    "multiplayer"
-  ],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
-    "socket.io": "^4.7.2"
+    "dotenv": "16.4.5"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@types/node": "20.11.30",
+    "eslint": "9.4.0",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.4",
+    "prettier": "3.3.2",
+    "turbo": "2.1.1",
+    "typescript": "5.4.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,md}": [
+      "pnpm lint",
+      "prettier --write"
+    ]
   }
 }
