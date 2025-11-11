@@ -1,0 +1,12 @@
+{
+  "name": "@sandbox/config",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "./eslint": "./eslint/base.mjs",
+    "./tsconfig": "./tsconfig/base.json",
+    "./tailwind": "./tailwind/tailwind.config.ts",
+    "./postcss": "./postcss.config.cjs",
+    "./prettier": "./prettier.config.cjs"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@sandbox/game-core",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsup --watch src/index.ts",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "format": "prettier --write 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "@types/node": "20.11.30",
+    "fast-fuzzy": "1.13.0"
+  },
+  "devDependencies": {
+    "@sandbox/config": "workspace:*",
+    "typescript": "5.4.5",
+    "tsup": "8.0.2",
+    "vitest": "1.6.0"
+  }
+}

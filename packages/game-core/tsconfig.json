@@ -1,0 +1,10 @@
+{
+  "extends": "@sandbox/config/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "composite": true
+  },
+  "include": ["src"]
+}

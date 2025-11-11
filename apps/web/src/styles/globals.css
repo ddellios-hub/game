@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-slate-100 text-slate-900 antialiased;
+}
+
+a {
+  @apply text-primary hover:underline;
+}
+
+[data-theme="dark"] body {
+  @apply bg-slate-900 text-slate-100;
+}

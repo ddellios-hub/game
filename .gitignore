@@ -1,4 +1,13 @@
-node_modules/
-.DS_Store
-npm-debug.log*
+node_modules
+.pnpm-store
+.next
+.out
+build
+coverage
 .env
+.env.*
+!.env.example
+playwright-report
+artifacts
+.DS_Store
+.prisma

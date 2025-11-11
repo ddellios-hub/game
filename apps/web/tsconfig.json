@@ -1,0 +1,15 @@
+{
+  "extends": "@sandbox/config/tsconfig",
+  "compilerOptions": {
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/hooks/*": ["./src/hooks/*"]
+    },
+    "types": ["node", "@types/react", "@types/react-dom"]
+  },
+  "include": ["next-env.d.ts", "src/**/*", "app/**/*", "pages/**/*", "components/**/*"],
+  "exclude": ["node_modules"]
+}

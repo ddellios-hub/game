@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  role      Role     @default(PLAYER)
+  password  String
+  coins     Int      @default(0)
+  createdAt DateTime @default(now())
+  rooms     Room[]   @relation("RoomOwner")
+  worlds    World[]  @relation("WorldOwner")
+  reports   Report[] @relation("ReportReporter")
+  receivedReports Report[] @relation("ReportTarget")
+  chat      ChatMessage[]
+  bans      Ban[]
+  auditLogs AuditLog[]
+}
+
+model Room {
+  id         String      @id @default(cuid())
+  name       String
+  maxPlayers Int         @default(12)
+  status     RoomStatus  @default(WAITING)
+  worldId    String?
+  world      World?      @relation(fields: [worldId], references: [id])
+  ownerId    String
+  owner      User        @relation("RoomOwner", fields: [ownerId], references: [id])
+  createdAt  DateTime    @default(now())
+  chat       ChatMessage[]
+
+  @@index([status])
+  @@index([worldId])
+}
+
+model World {
+  id          String   @id @default(cuid())
+  ownerId     String
+  owner       User     @relation("WorldOwner", fields: [ownerId], references: [id])
+  name        String
+  json        Json
+  isPublished Boolean  @default(false)
+  likes       Int      @default(0)
+  type        WorldType
+  rooms       Room[]
+  createdAt   DateTime @default(now())
+
+  @@index([isPublished, type])
+}
+
+model Report {
+  id            String   @id @default(cuid())
+  reporterId    String
+  reporter      User     @relation("ReportReporter", fields: [reporterId], references: [id])
+  targetUserId  String
+  targetUser    User     @relation("ReportTarget", fields: [targetUserId], references: [id])
+  reason        String
+  createdAt     DateTime @default(now())
+  status        ReportStatus @default(PENDING)
+
+  @@index([createdAt])
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  roomId    String
+  room      Room     @relation(fields: [roomId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([roomId, createdAt])
+}
+
+model Ban {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  reason    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([expiresAt])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String
+  actor     User     @relation(fields: [actorId], references: [id])
+  action    String
+  targetId  String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+enum Role {
+  ADMIN
+  MODERATOR
+  PLAYER
+}
+
+enum RoomStatus {
+  WAITING
+  IN_PROGRESS
+  ENDED
+}
+
+enum WorldType {
+  OBBY
+  PLATFORMER
+}
+
+enum ReportStatus {
+  PENDING
+  ACTIONED
+  DISMISSED
+}
